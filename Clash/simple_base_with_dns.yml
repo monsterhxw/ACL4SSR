@@ -4,10 +4,6 @@ allow-lan: true
 mode: Rule
 log-level: info
 external-controller: :9090
-Proxy: ~
-Proxy Group: ~
-Rule: ~
-
 dns:
   enable: true
   prefer-h3: false
