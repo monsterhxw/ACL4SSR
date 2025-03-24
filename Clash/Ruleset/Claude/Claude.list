@@ -1,0 +1,7 @@
+# See: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Claude/Claude.list
+DOMAIN-SUFFIX,servd-anthropic-website.b-cdn.net
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN,cdn.usefathom.com
