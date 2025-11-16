@@ -120,11 +120,49 @@ experimental:
 #    type: socks5
 #    server: 127.0.0.1
 #    port: 1080
+#
+#  # Hysteria 协议示例
+#  - name: "Hysteria-Example"
+#    type: hysteria
+#    server: hysteria.example.com
+#    port: 443
+#    auth: your_password
+#    protocol: udp
+#    alpn:
+#      - h3
+#    up: 50
+#    down: 100
+#    sni: hysteria.example.com
+#    obfs: salamander
+#    obfs-password: obfs_password
+#    skip-cert-verify: false
+#    recv-window-conn: 67108864
+#    recv-window: 134217728
+#    disable-mtu-discovery: false
+#    fast-open: false
+#
+#  # Hysteria2 协议示例
+#  - name: "Hysteria2-Example"
+#    type: hysteria2
+#    server: hysteria2.example.com
+#    port: 443
+#    password: your_password
+#    sni: hysteria2.example.com
+#    skip-cert-verify: false
+#    obfs: salamander
+#    obfs-password: obfs_password
+#    alpn:
+#      - h3
+#    up: 50
+#    down: 100
+#
 #proxy-groups:
 #  - name: Proxy
 #    type: select
 #    proxies:
 #      - Shadowsocks
+#      - Hysteria-Example
+#      - Hysteria2-Example
 #rules:
 #  - 'MATCH,DIRECT'
 

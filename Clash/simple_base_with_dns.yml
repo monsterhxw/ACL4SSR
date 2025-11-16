@@ -1,3 +1,5 @@
+# 此基础配置可与 Clash.Meta 搭配使用，支持 Hysteria/Hysteria2 等高级代理协议
+# Hysteria 节点示例请参考同目录下的 hysteria_example.yml
 port: 7890
 socks-port: 7891
 allow-lan: true

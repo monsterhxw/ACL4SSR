@@ -1,0 +1,143 @@
+# Hysteria Proxy Configuration Example
+# This file provides examples for configuring Hysteria and Hysteria2 proxies in Clash/Clash.Meta
+# Hysteria is a powerful, lightning fast and censorship resistant proxy protocol built on QUIC
+# Documentation: https://hysteria.network/
+
+proxies:
+  # Hysteria (Version 1) Example
+  - name: "Hysteria-HK"
+    type: hysteria
+    server: hysteria.example.com
+    port: 443
+    auth: your_password_here
+    protocol: udp
+    alpn:
+      - h3
+    up: 50
+    down: 100
+    sni: hysteria.example.com
+    obfs: salamander
+    obfs-password: obfs_password_here
+    skip-cert-verify: false
+    recv-window-conn: 67108864
+    recv-window: 134217728
+    disable-mtu-discovery: false
+    fast-open: false
+
+  # Hysteria (Version 1) with Custom CA
+  - name: "Hysteria-JP"
+    type: hysteria
+    server: jp.hysteria.example.com
+    port: 36712
+    auth: another_password
+    protocol: udp
+    alpn:
+      - h3
+    up: 100
+    down: 200
+    sni: jp.hysteria.example.com
+    skip-cert-verify: false
+    ca: /path/to/custom/ca.crt
+    recv-window-conn: 67108864
+    recv-window: 134217728
+
+  # Hysteria2 (Version 2) Example
+  - name: "Hysteria2-US"
+    type: hysteria2
+    server: hysteria2.example.com
+    port: 443
+    password: your_hysteria2_password
+    sni: hysteria2.example.com
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: obfs_password_here
+    alpn:
+      - h3
+    up: 50
+    down: 100
+
+  # Hysteria2 with UDP Relay
+  - name: "Hysteria2-SG"
+    type: hysteria2
+    server: sg.hysteria2.example.com
+    port: 8443
+    password: sg_password
+    sni: sg.hysteria2.example.com
+    skip-cert-verify: false
+    up: 100
+    down: 200
+    udp: true
+
+  # Hysteria2 Minimal Configuration
+  - name: "Hysteria2-Simple"
+    type: hysteria2
+    server: simple.hysteria2.example.com
+    port: 443
+    password: simple_password
+
+proxy-groups:
+  # Hysteria 节点手动切换
+  - name: "Hysteria节点"
+    type: select
+    proxies:
+      - Hysteria-HK
+      - Hysteria-JP
+      - Hysteria2-US
+      - Hysteria2-SG
+      - Hysteria2-Simple
+
+  # 自动选择最快的 Hysteria 节点
+  - name: "Hysteria自动"
+    type: url-test
+    proxies:
+      - Hysteria-HK
+      - Hysteria-JP
+      - Hysteria2-US
+      - Hysteria2-SG
+      - Hysteria2-Simple
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+
+  # 负载均衡 Hysteria 节点
+  - name: "Hysteria负载均衡"
+    type: load-balance
+    proxies:
+      - Hysteria-HK
+      - Hysteria-JP
+      - Hysteria2-US
+      - Hysteria2-SG
+      - Hysteria2-Simple
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+
+rules:
+  - MATCH,Hysteria节点
+
+# Configuration Notes:
+#
+# Hysteria (Version 1) Parameters:
+#   - auth: Authentication password
+#   - protocol: Transmission mode (udp / wechat-video / faketcp)
+#   - up / down: Bandwidth limits in Mbps
+#   - obfs / obfs-password: Obfuscation settings (salamander)
+#   - recv-window-conn / recv-window: QUIC window tuning
+#   - disable-mtu-discovery: Disable MTU discovery if needed
+#   - fast-open: Enable fast open (requires kernel support)
+#
+# Hysteria2 (Version 2) Parameters:
+#   - password: Authentication password
+#   - obfs / obfs-password: Optional salamander obfuscation
+#   - up / down: Bandwidth hints in Mbps
+#   - udp: Enable UDP relay (default true)
+#
+# Common Parameters:
+#   - server / port: Remote server address and port
+#   - sni: TLS Server Name Indication
+#   - skip-cert-verify: Skip TLS certificate validation (not recommended)
+#   - alpn: Application Layer Protocol Negotiation (recommend h3)
+#   - ca / ca-str: Custom CA path or inline certificate
+#
+# Performance Tips:
+#   - Match up/down values to your actual bandwidth
+#   - Enable obfs for better censorship resistance
+#   - Increase recv-window values for high-latency connections
