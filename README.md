@@ -34,7 +34,7 @@
 
 ## 其他规则转换 clash Quantumul Surge Surfboard Trojan
 
-​	前后端都是开源的，自己随便搭建。自建的话，只自建后端已经足够
+​    前后端都是开源的，自己随便搭建。自建的话，只自建后端已经足够
 
 前端：[sub-web]( https://github.com/CareyWang/sub-web)
 
@@ -59,6 +59,7 @@
 | Surge 3                      |     ✓      |      ✓       | surge&ver=3         |
 | Surge 4                      |     ✓      |      ✓       | surge&ver=4         |
 | Trojan                       |     ✓      |      ✓       | trojan              |
+| Hysteria / Hysteria2         |     ✓      |      ✓       | hysteria / hysteria2|
 | V2Ray                        |     ✓      |      ✓       | v2ray               |
 | 类 TG 代理的 HTTP/Socks 链接 |     ✓      |      ×       | 仅支持 `&url=` 调用 |
 
@@ -71,6 +72,15 @@
 具体怎么使用需要看对应软件配置是怎么写的，还要请大家阅读你所使用的软件文档，看是否能使用
 
 示例：项目里/Clash/config/目录下存放的是 [subconverter](https://github.com/tindy2013/subconverter/blob/master/README-cn.md#外部配置)的 配置示例
+
+### Hysteria 代理协议支持
+
+本项目已添加对 Hysteria 和 Hysteria2 高性能代理协议的完整支持。详细配置说明请参阅 [Hysteria 配置文档](Clash/HYSTERIA_README.md)。
+
+**相关文件：**
+- `Clash/hysteria_example.yml` - Hysteria 完整配置示例
+- `Clash/config/ACL4SSR_Hysteria.ini` - Hysteria 专用 Subconverter 配置模板
+- `Clash/HYSTERIA_README.md` - 详细使用文档
 
 | 文件                   | 类型                 | 解释                                                         |
 | ---------------------- | -------------------- | ------------------------------------------------------------ |
@@ -119,6 +129,6 @@
 
 * 有问题请发issue,说明状况和所用规则。
 
-# License		
+# License        
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0
